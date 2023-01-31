@@ -27,7 +27,7 @@
         </ul>
         
     </div>
-    
+    @auth('admin')
     <div>
         <a href="/zoos/{{ $zoo->id }}/edit">Edit</a>
     </div>
@@ -41,7 +41,7 @@
     <div>
         <a href="/zoos" class="c-zoo__back">Zoo Archive</a>
     </div>
-    
+    @endauth
     <!-- APIキーを指定してjsファイルを読み込む -->
         <script>
           let address = @json($zoo->adress);
