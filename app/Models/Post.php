@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Zoo;
 use App\Models\Animal_family;
+use App\Models\Like;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,6 +33,10 @@ class Post extends Model
     
     public function animal_family() {
         return $this->belongsTo(Animal_family::class);
+    }
+    
+    public function likes() {
+        return $this->hasMany(Like::class);
     }
     
     protected static function boot()

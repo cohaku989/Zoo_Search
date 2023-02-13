@@ -12,10 +12,10 @@
                     <a href="/myprofile">アカウント情報</a>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
-                    お気に入り動物園
+                    <a href="{{ route("favzoo") }}">お気に入り動物園</a>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
-                    お気に入り動物
+                    <a href="{{ route("favanimal") }}">お気に入り動物</a>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="/myposts/">MY投稿</a>

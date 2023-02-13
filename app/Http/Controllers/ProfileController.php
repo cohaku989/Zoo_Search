@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Zoo;
+use App\Models\Favzoo;
+use App\Models\Favanimal;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
@@ -31,5 +34,19 @@ class ProfileController extends Controller
         }
         $user->save();
         return redirect('/myprofile');
+    }
+    
+    public function favzoo()
+    {
+        $favzs = Favzoo::where('user_id', Auth::id())->with(['zoo'])->get();
+        // dd($favz);
+        return view('user/profile/favzoo')->with(['favzs' => $favzs]);
+    }
+    
+    public function favanimal()
+    {
+        $favas = Favanimal::where('user_id', Auth::id())->with(['animal_family'])->get();
+        // dd($favz);
+        return view('user/profile/favanimal')->with(['favas' => $favas]);
     }
 }

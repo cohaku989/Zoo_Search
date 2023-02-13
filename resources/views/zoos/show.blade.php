@@ -21,12 +21,41 @@
         
         
         <ul class="l-zoo_priceList">
-            <li class="c-zoo_adult">{{ $zoo->adults_price }}</li>
-            <li class="c-zoo_middle">{{ $zoo->middle_price }}</li>
-            <li class="c-zoo_children">{{ $zoo->children_price }}</li>
+            <li class="c-zoo_priceItem">{{ $zoo->seniors_price }}</li>
+            <li class="c-zoo_priceItem">{{ $zoo->adults_price }}</li>
+            <li class="c-zoo_priceItem">{{ $zoo->hsstudents_price }}</li>
+            <li class="c-zoo_priceItem">{{ $zoo->jhsstudents_price }}</li>
+            <li class="c-zoo_priceItem">{{ $zoo->esstudents_price }}</li>
+            <li class="c-zoo_priceItem">{{ $zoo->children_price }}</li>
         </ul>
         
     </div>
+    <style>
+        div .favzbtn:nth-child(2){
+            display: none;
+        }
+        .is_show{
+            display: block!important;
+        }
+    </style>
+    
+    @if (auth('web')->user())
+        @if( $favz === null )
+        <div>
+            <button data-zooid="{{$zoo->id}}" data-userid="{{$user->id}}" data-favz="{{$favz}}"class="favzbtn">いいね</button>
+            <button data-zooid="{{$zoo->id}}" data-userid="{{$user->id}}" data-favz="0" style="color:red" class="favzbtn">いいね</button>
+        </div>
+        
+        
+        @elseif($favz != null)
+        <div class="favz">
+            <button data-zooid="{{$zoo->id}}" data-userid="{{$user->id}}" data-favz="{{$favz}}" style="color:red" class="favzbtn">いいね</button>
+            <button data-zooid="{{$zoo->id}}" data-userid="{{$user->id}}" data-favz="1" class="favzbtn">いいね</button>
+        </div>
+        @endif
+    
+    @endif
+    
     @auth('admin')
     <div>
         <a href="/zoos/{{ $zoo->id }}/edit">Edit</a>

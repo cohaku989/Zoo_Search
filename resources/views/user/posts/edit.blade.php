@@ -36,7 +36,7 @@
     </form>
     
     <div>
-        <a href="/myposts/{{ $post->id }}" class="l-main__post__back">My Post</a>
+        <a href="/gallery/{{ $post->id }}" class="l-main__post__back">My Post</a>
     </div>
     
 @endsection

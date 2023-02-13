@@ -21,8 +21,11 @@ return new class extends Migration
             $table->text('caption');
             $table->string('adress');
             $table->string('hp_url');
+            $table->integer('seniors_price')->nullable();
             $table->integer('adults_price')->nullable();
-            $table->integer('middle_price')->nullable();
+            $table->integer('hsstudents_price')->nullable();
+            $table->integer('jhsstudents_price')->nullable();
+            $table->integer('esstudents_price')->nullable();
             $table->integer('children_price')->nullable();
             $table->softDeletes();
         });

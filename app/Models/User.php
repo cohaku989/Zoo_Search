@@ -5,6 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Post;
 use App\Models\Zoo;
+use App\Models\Favzoo;
+use App\Models\Favanimal;
+use App\Models\Like;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,9 +54,20 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
     
-     public function zoos() {
+    public function zoos() {
         return $this->belongsToMany(Zoo::class);
     }
-
+    
+    public function favzoos() {
+        return $this->hasMany(Favzoo::class);
+    }
+    
+    public function favanimals() {
+        return $this->hasMany(Favanimal::class);
+    }
+    
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
     
 }

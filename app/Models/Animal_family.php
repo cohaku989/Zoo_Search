@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Post;
 use App\Models\Zoo;
+use App\Models\Favanimal;
 use App\Models\Animal_order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,5 +27,9 @@ class Animal_family extends Model
     
     public function posts() {
         return $this->hasMany(Post::class);
+    }
+    
+    public function favanimals() {
+        return $this->hasMany(Favanimal::class);
     }
 }
