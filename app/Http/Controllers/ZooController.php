@@ -6,6 +6,8 @@ use App\Models\Prefecture;
 use App\Models\Zoo;
 use App\Models\Animal_family;
 use App\Models\Animal_class;
+use App\Models\Favzoo;
+use App\Models\Favanimal;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +23,11 @@ class ZooController extends Controller
  
     public function show(Zoo $zoo)
     {
+        $user = Auth::user();
+        $where = ['user_id'=> $user->id, 'zoo_id' => $zoo->id];
+        $favz = Favzoo::where($where)->first();
         return view('zoos/show')
-        ->with(['zoo' => $zoo]);
+        ->with(['zoo' => $zoo, 'user' => $user, 'favz' => $favz]);
     }
     
     public function create(Zoo $zoo) 
@@ -77,5 +82,21 @@ class ZooController extends Controller
     {
         $zoo->delete();
         return redirect('/zoos');
+    }
+    
+    public function each_zoo($id, Animal_family $anmlf, Zoo $zoo)
+    {
+        $user = Auth::user();
+        $where = ['user_id'=> $user->id, 'animal_family_id' => $id];
+        $fava = Favanimal::where($where)->first();
+        $anmlf = Animal_family::with('zoos')->get();
+        
+        return view('zoos/each')
+        ->with([
+            'anmlfs' => $anmlf, 
+            'id' => $id, 
+            'fava' => $fava,
+            'user' => $user,
+            ]);
     }
 }

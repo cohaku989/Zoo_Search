@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Animal_family;
 use App\Models\Prefecture;
+use App\Models\Favzoo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,8 +26,11 @@ class Zoo extends Model
         'hp_url',
         'prefecture_id',
         'adults_price',
-        'middle_price',
         'children_price',
+        'seniors_price',
+        'jhsstudents_price',
+        'hsstudents_price',
+        'esstudents_price',
     ];
     
     public function admin() {
@@ -46,7 +50,13 @@ class Zoo extends Model
         return $this->belongsToMany(User::class);
     }
     
-
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+    
+    public function favzoos() {
+        return $this->hasMany(Favzoo::class);
+    }
 
     protected static function boot()
     {

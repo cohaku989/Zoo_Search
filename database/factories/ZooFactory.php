@@ -25,9 +25,12 @@ class ZooFactory extends Factory
             'caption'=> fake()->realText(120), 
             'adress' => fake()->address(),
             'hp_url' => fake()->url,
-            'adults_price' => fake()->numberBetween($min = 500, $max = 4000),
-            'middle_price' => fake()->numberBetween($min = 100, $max = 3000),
-            'children_price' => fake()->numberBetween($min = 50, $max = 2500),
+            'seniors_price' => fake()->numberBetween($min = 500, $max = 4000),
+            'adults_price' => fake()->numberBetween($min = 100, $max = 3000),
+            'hsstudents_price' => fake()->numberBetween($min = 50, $max = 2500),
+            'jhsstudents_price' => fake()->numberBetween($min = 0, $max = 1000),
+            'esstudents_price' => fake()->numberBetween($min = 0, $max = 500),
+            'children_price' => fake()->numberBetween($min = 0, $max = 500),
         ];
     }
 }

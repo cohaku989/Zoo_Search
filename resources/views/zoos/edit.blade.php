@@ -66,19 +66,33 @@
 
         <br>
         
+        <label for="adults_price">シニア料金</label>
+        <br>
+        <input type="text" name="zoo[seniors_price]" value="{{ old('zoo[seniors_price]') }}" />
+        <br>
         <label for="adults_price">大人料金</label>
         <br>
-        <input type="text" name="zoo[adults_price]" inputMode="numeric" value="@if($zoo->adults_price){{$zoo->adults_price}} @else {{ old('zoo[adults_price]') }} @endif" />
+        <input type="text" name="zoo[adults_price]" value="{{ old('zoo[adults_price]') }}" />
         <br>
         
-        <label for="middle_price">中人料金</label>
+        <label for="middle_price">高校生料金</label>
         <br>
-        <input type="text" name="zoo[middle_price]" inputMode="numeric" value="@if($zoo->middle_price){{$zoo->middle_price}} @else{{ old('zoo[middle_price]') }} @endif" />
+        <input type="text" name="zoo[hsstudents_price]" value="{{ old('zoo[hsstudents_price]') }}" />
+        <br>
+        
+        <label for="middle_price">中学生料金</label>
+        <br>
+        <input type="text" name="zoo[jhsstudents_price]" value="{{ old('zoo[jhsstudents_price]') }}" />
+        <br>
+        
+        <label for="middle_price">小学生料金</label>
+        <br>
+        <input type="text" name="zoo[esstudents_price]" value="{{ old('zoo[esstudents_price]') }}" />
         <br>
         
         <label for="children_price">こども料金</label>
         <br>
-        <input type="text" name="zoo[children_price]" inputMode="numeric" value="@if($zoo->children_price){{$zoo->children_price}} @else{{ old('zoo[children_price]') }} @endif" />
+        <input type="text" name="zoo[children_price]" value="{{ old('zoo[children_price]') }}" />
         <br>
         <input type="submit" value="更新"/>
     </form>

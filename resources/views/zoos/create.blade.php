@@ -37,15 +37,15 @@
                 display: none;
             }
         </style>
-        <div class="l-animal">
+        <div class="c-animal">
         @foreach($ani_rels as $animal_class)
-            <details class="e-animal_class">
+            <details class="c-animal_class">
                 <summary>{{ $animal_class->animal_class }}</summary>
-                <ul class="e-animal_order">
+                <ul class="c-animal_order">
                 @foreach($animal_class->animal_orders as $animal_order)
                     <li>
                         <p class="c-anmlPrnt{{ $animal_order->id }}" id="anmlPrnt{{ $animal_order->id }}">{{ $animal_order->animal_order }}</p>
-                        <ul class="e-animal_family">
+                        <ul class="c-animal_family">
                         @foreach($animal_order->animal_families as $animal_family)
                             <li id="anmlChild{{ $animal_family->id }}" class="c-anmlChild c-anmlPrnt{{ $animal_family->animal_order_id }}">
                                 <input type="checkbox" name="animal_family[]" value="{{ $animal_family->id }}" class="" >{{ $animal_family->animal_family }}
@@ -62,14 +62,28 @@
 
         <br>
         
+        <label for="adults_price">シニア料金</label>
+        <br>
+        <input type="text" name="zoo[seniors_price]" value="{{ old('zoo[seniors_price]') }}" />
+        <br>
         <label for="adults_price">大人料金</label>
         <br>
         <input type="text" name="zoo[adults_price]" value="{{ old('zoo[adults_price]') }}" />
         <br>
         
-        <label for="middle_price">中人料金</label>
+        <label for="middle_price">高校生料金</label>
         <br>
-        <input type="text" name="zoo[middle_price]" value="{{ old('zoo[middle_price]') }}" />
+        <input type="text" name="zoo[hsstudents_price]" value="{{ old('zoo[hsstudents_price]') }}" />
+        <br>
+        
+        <label for="middle_price">中学生料金</label>
+        <br>
+        <input type="text" name="zoo[jhsstudents_price]" value="{{ old('zoo[jhsstudents_price]') }}" />
+        <br>
+        
+        <label for="middle_price">小学生料金</label>
+        <br>
+        <input type="text" name="zoo[esstudents_price]" value="{{ old('zoo[esstudents_price]') }}" />
         <br>
         
         <label for="children_price">こども料金</label>

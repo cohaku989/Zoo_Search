@@ -6,6 +6,7 @@
         @csrf
 
         <input type="file" name="img">
+        <p class="title__error" style="color:red">{{ $errors->first('img') }}</p>
         <br>
         <label for="post_text">Body</label>
         <br>
