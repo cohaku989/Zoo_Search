@@ -19,6 +19,15 @@
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="/myposts/">MY投稿</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('ログアウト') }}
+                            </x-dropdown-link>
+                        </form>
                 </div>
             </div>
         </div>

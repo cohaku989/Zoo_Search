@@ -49,96 +49,71 @@ function initMap() {
 
 
 //top_animal settings
-document.querySelectorAll('.c-animalClass_each').forEach(function(elem){
+document.querySelectorAll('.c-animal_classItem').forEach(function(elem){
    elem.addEventListener('click', anmlFn);
 });
 
-document.querySelectorAll('.c-animalOrder_each').forEach(function(elem){
+document.querySelectorAll('.c-animal_orderItem').forEach(function(elem){
    elem.addEventListener('click', anmlFn);
 });
 
 function anmlFn(e){
-    let target = e.currentTarget;
-    let id = target.id;
-    let prnt = e.currentTarget.nextElementSibling;
-    if(target.classList.contains('c-animalClass_each')){
-        let child = prnt.querySelectorAll('.c-animalOrder_each');
-        let otherPrnt = document.querySelectorAll('.c-animalClass_each');
-        let otherChild = document.querySelectorAll('.c-animalOrder_each');
-            for(let elem of otherPrnt){
-                if(!(elem.id == id)){
-                    elem.classList.remove('is_active');
-                }
-                elem.querySelectorAll('.c-animalOrder_each').forEach((e)=>{
-                    if(!(elem.id == id) && !e.classList.contains('is_active') ){
-                        elem.classList.remove('is_active');
-                    }
-                });
-            };
-            
-            for(let elem of otherChild){
-                let prnt1 = elem.parentElement;
-                let gPrnt1 = prnt1.parentElement;
-                
-                //class
-                if(!elem.classList.contains(id)){
-                    gPrnt1.classList.remove('is_show');
-                }
-                if(!(elem.id == id)){
-                    elem.classList.remove('is_active');
-                }
-        
-            };
-            
-            target.classList.add('is_active');
-            
-            for(let elem of child){
-                if(elem.classList.contains(id)){
-                    prnt.classList.add('is_show');
-                }
-            };
+    let prnt = e.currentTarget;
+    let pid = prnt.id;
+    let anmlcs = document.querySelectorAll('.c-animal_classItem');
+    let anmlos = document.querySelectorAll('.c-animal_orderItem');
+    let anmlfs = document.querySelectorAll('.c-animal_familyItem');
     
-    }else if(target.classList.contains('c-animalOrder_each')){
-        let child = prnt.querySelectorAll('.c-animalFamily_each');
-        let otherPrnt = document.querySelectorAll('.c-animalOrder_each');
-        let otherChild = document.querySelectorAll('.c-animalFamily_each');
-            for(let elem of otherPrnt){
-                if(!(elem.id == id)){
-                    elem.classList.remove('is_active');
-                }
-                elem.querySelectorAll('.c-animalOrder_each').forEach((e)=>{
-                    if(!(elem.id == id) && !e.classList.contains('is_active') ){
-                        elem.classList.remove('is_active');
-                    }
-                });
-            };
-            
-            for(let elem of otherChild){
-                let prnt1 = elem.parentElement;
-                let gPrnt1 = prnt1.parentElement;
-                
-                //class
-                if(!elem.classList.contains(id)){
-                    gPrnt1.classList.remove('is_show');
-                }
-                if(!(elem.id == id)){
-                    elem.classList.remove('is_active');
-                }
+        let active = prnt.classList.contains('is_active');
+        for(let anmlc of anmlcs){
+            if(anmlc.id == pid && !active){
+                anmlc.classList.add('is_active');
+            }else if(anmlc.id == pid && active){
+                anmlc.classList.remove('is_active');
+            }else if(anmlc.id != pid && prnt.classList.contains('c-animal_classItem')){
+                anmlc.classList.remove('is_active');
+            }
+        }
         
-            };
+        for(let anmlo of anmlos){
+            let show = anmlo.parentElement.classList.contains('is_show');
+            let child = anmlo.classList.contains(pid);
             
-            target.classList.add('is_active');
+            if(!active && child){
+                anmlo.parentElement.classList.add('is_show');
+            }else if(active && child && show){
+                anmlo.parentElement.classList.remove('is_show');
+            }else if(!child && prnt.classList.contains('c-animal_classItem')){
+                anmlo.parentElement.classList.remove('is_show');
+            }
+        }
+        
+        for(let anmlo of anmlos){
+            if(anmlo.id == pid && !active){
+                anmlo.classList.add('is_active');
+            }else if(anmlo.id == pid && active){
+                anmlo.classList.remove('is_active');
+            }else if(anmlo.id != pid){
+                anmlo.classList.remove('is_active');
+            }
+        }
+        
+        for(let anmlf of anmlfs){
+            let show = anmlf.parentElement.classList.contains('is_show');
+            let child = anmlf.classList.contains(pid);
             
-            for(let elem of child){
-                if(elem.classList.contains(id)){
-                    prnt.classList.add('is_show');
-                }
-            };
-    }
-    
+            if(!active && child){
+                anmlf.parentElement.classList.add('is_show');
+            }else if(active && child && show){
+                anmlf.parentElement.classList.remove('is_show');
+            }else if(!child){
+                anmlf.parentElement.classList.remove('is_show');
+            }
+        }
+
 }
 
-document.querySelectorAll('.c-postLink').forEach((elem)=>{
+document.querySelectorAll('.links').forEach((elem)=>{
     elem.addEventListener('click', linkFn)
 })
 

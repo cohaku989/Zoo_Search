@@ -1,0 +1,37 @@
+.p-gallery {
+    
+    &List{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, auto));
+        grid-auto-rows: 1fr;
+        grid-gap: 10px;
+    }
+    
+}
+
+.c-gallery{
+    
+    &Title {
+        font-size: clamp(20px, 3vw, 30px);
+        font-weight: bold;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    
+    &_item {
+        border: solid 1px;
+        aspect-ratio: 1 / 1;
+        
+        a {
+          display: block;
+          padding: 5px;
+          height: 100%;
+        } 
+        a img {
+            object-fit: cover;
+            height: 100%;
+            border: solid 1px;
+        }
+    }
+}
