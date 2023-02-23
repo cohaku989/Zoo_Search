@@ -21,11 +21,21 @@ class PostRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+     
+    
+    public function messages()
+    {
+      return [
+        'img.required' => '投稿する画像を選択してください',
+        'post.zoo_id.required' => 'タグ付けする動物園を選択してください',
+        'post.animal_family_id.required' => 'タグ付けする動物を選択してください',
+      ];
+    }
+
     public function rules()
     {
         return [
             'img' => 'required|image',
-            'post.body' => 'required|string',
             'post.zoo_id' => 'required',
             'post.animal_family_id' => 'required',
         ];

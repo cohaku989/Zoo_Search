@@ -2,22 +2,44 @@
 
 @section('contents')
 
-    <div class="l-main__post">
-        <div class="l-main__post__create">
-            <a href="/myposts/create">Create</a>
+    <div class="l-main">
+        <div class="l-side">
+            <ul class="l-side_list">
+                <li class="l-side_item"><a href="{{ route('dashboard') }}">マイページTOP</a></li>
+                <li class="l-side_item"><a href="{{ route('profile.info') }}">アカウント情報</a></li>
+                <li class="l-side_item"><a href="{{ route("favzoo") }}">お気に入り動物園</a></li>
+                <li class="l-side_item"><a href="{{ route("favanimal") }}">お気に入り動物</a></li>
+                <li class="l-side_item"><a href="{{ route("post.archive") }}">MY投稿</a></li>
+            </ul>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                    <x-dropdown-link :href="route('logout')" class="c-btn" 
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                        {{ __('ログアウト') }}
+                </x-dropdown-link>
+            </form>
         </div>
-        
-        @foreach ($post as $a_post)
-            <div class="l-main__postItem">
-                <!-- 一時的リンクタイトル -->
-                <div><a href="/gallery/{{ $a_post->id }}"><img src="{{ $a_post->img }}" alt=""></a></div>
-                <figure class="l-main__post__img"><img src="" alt=""></figure>
-                <p class="l-main__post__text">{{ $a_post->body }}</p>
-                <p class="l-main__post__place"></p>
-                <p class="l-main__post__animal"></p>
+        <div class="l-content">
+            <div class="l-post_title">
+                <h3 class="c-h3">MY投稿</h3>
+                <a class="c-back" href="{{ route('dashboard') }}">マイページに戻る</a>
+                <a class="c-next" href="{{ route('post.create') }}">新しい投稿</a>
             </div>
-        @endforeach
-        
+            
+            <div class="l-post">
+            @foreach ($post as $a_post)
+                <a href="{{ route('gallery.post', $a_post->id) }}">
+                    <div class="l-post_item">
+                        <div class="l-post_img">
+                            <img src="{{ $a_post->img }}" alt="">
+                        </div>
+                        <p class="l-post_text">{{ $a_post->body }}</p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+        </div>
     </div>
     
 @endsection

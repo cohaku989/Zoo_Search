@@ -24,10 +24,15 @@ class ZooController extends Controller
     public function show(Zoo $zoo)
     {
         $user = Auth::user();
-        $where = ['user_id'=> $user->id, 'zoo_id' => $zoo->id];
-        $favz = Favzoo::where($where)->first();
-        return view('zoos/show')
-        ->with(['zoo' => $zoo, 'user' => $user, 'favz' => $favz]);
+        if($user){
+            $where = ['user_id'=> $user->id, 'zoo_id' => $zoo->id];
+            $favz = Favzoo::where($where)->first();
+            return view('zoos/show')
+            ->with(['zoo' => $zoo, 'user' => $user, 'favz' => $favz]);
+        }else {
+             return view('zoos/show')
+            ->with(['zoo' => $zoo]);
+        }
     }
     
     public function create(Zoo $zoo) 
@@ -87,16 +92,24 @@ class ZooController extends Controller
     public function each_zoo($id, Animal_family $anmlf, Zoo $zoo)
     {
         $user = Auth::user();
-        $where = ['user_id'=> $user->id, 'animal_family_id' => $id];
-        $fava = Favanimal::where($where)->first();
-        $anmlf = Animal_family::with('zoos')->get();
-        
-        return view('zoos/each')
-        ->with([
-            'anmlfs' => $anmlf, 
-            'id' => $id, 
-            'fava' => $fava,
-            'user' => $user,
+        if($user){
+            $where = ['user_id'=> $user->id, 'animal_family_id' => $id];
+            $fava = Favanimal::where($where)->first();
+            $anmlf = Animal_family::with('zoos')->get();
+            return view('zoos/each')
+            ->with([
+                'anmlfs' => $anmlf, 
+                'id' => $id, 
+                'fava' => $fava,
+                'user' => $user,
             ]);
+        }else {
+            $anmlf = Animal_family::with('zoos')->get();
+             return view('zoos/each')
+            ->with([
+                'anmlfs' => $anmlf, 
+                'id' => $id,
+            ]);
+        }
     }
 }

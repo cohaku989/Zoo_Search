@@ -3,7 +3,8 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\ZooController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\PageController;
@@ -26,8 +27,8 @@ use Illuminate\Support\Facades\Route;
 
 //auth:users settings
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('/account/dashboard');
+})->middleware(['verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -42,17 +43,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/myposts', [PostController::class, 'archive']);
-    Route::get('/myposts/create', [PostController::class, 'create']);
-    Route::get('/myposts/{post}/edit', [PostController::class, 'edit']);
-    Route::post('/myposts', [PostController::class, 'store']);
-    Route::put('/myposts/{post}', [PostController::class, 'update']);
-    Route::delete('/myposts/{post}', [PostController::class, 'delete']);
+    Route::get('/myposts', [PostController::class, 'archive'])->name('post.archive');
+    Route::get('/myposts/create', [PostController::class, 'create'])->name('post.create');
+    Route::get('/myposts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::post('/myposts', [PostController::class, 'store'])->name('post.store');
+    Route::put('/myposts/{post}', [PostController::class, 'update'])->name('post.update');
+    Route::delete('/myposts/{post}', [PostController::class, 'delete'])->name('post.delete');
     //myprofile settings
-    Route::get('/myprofile', [ProfileController::class, 'archive']);
-    Route::get('/myprofile/{link}/edit', [ProfileController::class, 'edit']);
-    Route::put('/myprofile', [ProfileController::class, 'update']);
-    Route::delete('/myprofile', [ProfileController::class, 'delete']);
+    Route::get('/myprofile', [ProfileController::class, 'archive'])->name('profile.info');
+    Route::get('/myprofile/{link}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/myprofile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/myprofile', [ProfileController::class, 'delete'])->name('profile.delete');
     Route::get('/myfavzoos', [ProfileController::class, 'favzoo'])->name("favzoo");
     Route::get('/myfavanimals', [ProfileController::class, 'favanimal'])->name("favanimal");
     
@@ -65,10 +66,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/gallery/like/{id}', [LikeController::class, 'store'])->name('like');
     Route::post('/gallery/unlike/{id}', [LikeController::class, 'destroy'])->name('unlike');
     
-    // Route::get('change-password', [PasswordResetLinkController::class, 'createreset'])
-    //             ->name('password.request');
-    // Route::post('reset-password', [NewPasswordController::class, 'storereset'])
-    //             ->name('password.update');
+    Route::get('change-password', [NewPasswordController::class, 'createreset'])
+                ->name('password.change');
+    Route::post('reset-password', [NewPasswordController::class, 'storereset'])
+                ->name('password.update');
 });
 
 Route::middleware('auth:admin')->group(function () {
@@ -90,9 +91,9 @@ Route::get('/zoos/{zoo}', [ZooController::class, 'show'])->name('zoo.show');
 Route::get('/zoos/each/{id}', [ZooController::class, 'each_zoo'])->name('zoo.each');
 
 Route::controller(TopController::class)->group(function(){
-    Route::get('/', 'show_place');
-    Route::get('/top_animals', 'show_animals');
-    Route::get('/top_price', 'show_price');
+    Route::get('/', 'show_place')->name('search.place');
+    Route::get('/top_animals', 'show_animals')->name('search.animal');
+    Route::get('/top_price', 'show_price')->name('search.price');
 });
 
 Route::controller(PageController::class)->group(function(){

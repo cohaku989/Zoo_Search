@@ -34,6 +34,8 @@
                         </button>
                     </x-slot>
 
+
+
                     <x-slot name="content">
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -46,6 +48,7 @@
                             </x-dropdown-link>
                         </form>
                     </x-slot>
+                    
                 </x-dropdown>
             </div>
 

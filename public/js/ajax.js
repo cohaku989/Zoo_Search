@@ -185,8 +185,9 @@ $(function(){
         if(like === "" && !($this.next().hasClass("is_show"))){
             ajaxFav().done(function(data, status, xhr){
                 console.log(data);
+                $this.removeClass("heart")
                 $this.hide();
-                $this.next().addClass("is_show");
+                $this.next().addClass("is_show heart");
                 $('.likeNum').text(`${data}いいね`);
                 
             }).fail(function(xhr, status, error){
@@ -195,8 +196,9 @@ $(function(){
         } else if(like == "0" && $this.hasClass("is_show")){
             ajaxUnfav().done(function(data, status, xhr){
                 console.log(data);
-                $this.removeClass("is_show");
+                $this.removeClass("is_show heart");
                 $this.prev().show();
+                $this.prev().addClass('heart');
                 $('.likeNum').text(`${data}いいね`);
                 
             }).fail(function(xhr, status, error){
@@ -205,8 +207,9 @@ $(function(){
         } else if(like != "1" && like != "" && !$this.next().hasClass("is_show")){
             ajaxUnfav().done(function(data, status, xhr){
                 console.log(data);
+                $this.removeClass("heart");
                 $this.hide();
-                $this.next().addClass("is_show");
+                $this.next().addClass("is_show heart");
                 $('.likeNum').text(`${data}いいね`);
                 
             }).fail(function(xhr, status, error){
@@ -215,8 +218,9 @@ $(function(){
         } else if(like == "1" && $this.hasClass("is_show")){
             ajaxFav().done(function(data, status, xhr){
                 console.log(data);
-                $this.removeClass("is_show");
+                $this.removeClass("is_show  heart");
                 $this.prev().show();
+                $this.prev().addClass("heart");
                 $('.likeNum').text(`${data}いいね`);
                 
             }).fail(function(xhr, status, error){

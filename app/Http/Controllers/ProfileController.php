@@ -36,10 +36,10 @@ class ProfileController extends Controller
         return redirect('/myprofile');
     }
     
-    public function favzoo()
+    public function favzoo(Favzoo $favzs)
     {
         $favzs = Favzoo::where('user_id', Auth::id())->with(['zoo'])->get();
-        // dd($favz);
+        
         return view('user/profile/favzoo')->with(['favzs' => $favzs]);
     }
     
