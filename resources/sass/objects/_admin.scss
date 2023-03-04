@@ -1,0 +1,110 @@
+@use "../bases/variables" as v;
+
+.l-post_zoo{
+    display: flex;
+    border: solid 1px;
+    border-radius: 1rem;
+    background-color: v.$gray-white;
+    padding: 30px 30px 20px;
+    flex-wrap: wrap;
+    margin: 50px 0;
+    
+    &Item{
+        position: relative;
+        margin: 0 10px 10px 0;
+        border: solid 1px;
+        border-radius: 5px;
+        background-color: v.$light-orange;
+        display: flex;
+        align-items: center;
+        
+        &::before {
+            font-family: "Font Awesome 5 Free";
+            position: absolute;
+            font-weight: bold;
+            content: "\f56b";
+            left: 8px;
+            color: v.$sdcolor;
+        }
+        
+        a {
+            display: block;
+            padding: 10px 20px 10px 30px;
+        }
+    }
+}
+
+.p-dashWrap.p-admin {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 160px));
+    justify-content: center;
+}
+
+.fzoo .c-back {
+    background-color: v.$gray-white;
+}
+
+.p-fZoo {
+    grid-auto-rows: 1fr;
+    
+    .c-btn {
+        background-color: v.$mdcolor;
+        border-color: v.$mdcolor;
+        color: v.$gray-white;
+    }
+    
+    div:is(:nth-of-type(1), :nth-of-type(2), :nth-of-type(3), :nth-of-type(4), :nth-of-type(5), :nth-of-type(12) ) {
+        grid-column: 1/3;
+    }
+    
+    div:nth-of-type(12) {
+        margin: 50px auto 0;
+    }
+        
+    &_wrap {
+        display: grid;
+        grid-gap: 10px;
+    }
+    
+    &_order {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, calc((100% - 10px)/2));
+        grid-auto-rows: min-content;
+        grid-gap: 10px;
+        padding: 30px;
+        border: solid 1px;
+        margin-top: 20px;
+        
+        &Wrap {
+            position: relative;
+        }
+    }
+    
+    &_family {
+        display: none;
+        white-space: nowrap;
+        background-color: white;
+        border: solid 1px;
+        z-index: 1;
+        padding: 10px;
+        line-height: 1.6;
+        margin-top: 10px;
+        
+        &Wrap {
+            display: flex;
+            align-items: center;
+        }
+        
+        &Item {
+            margin-right: 10px;
+            width: 20px;
+            aspect-ratio: 1/1;
+            height: auto;
+        }
+    }
+}
+
+.adminSet {
+    .p-profile_list {
+        grid-template-columns: 1fr 1fr;
+    }
+}

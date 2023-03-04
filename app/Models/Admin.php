@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Zoo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Notifications\AdminResetPassword as ResetPasswordNotification;
 use Laravel\Sanctum\HasApiTokens;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function sendPasswordResetNotification($token){
+
+        $this->notify(new ResetPasswordNotification($token));
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +26,7 @@ class Admin extends Authenticatable
     public $timestamps = false;
     
     protected $fillable = [
-        'admin_id',
+        'id',
         'name',
         'email',
         'password',

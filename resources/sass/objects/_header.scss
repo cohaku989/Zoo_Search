@@ -1,0 +1,289 @@
+@use "../bases/variables" as v;
+
+.l-header {
+    &_title {
+        font-size: clamp(24px, 4vw, 36px);
+        font-weight: bold;
+        color: v.$gray-white;
+        text-shadow: 
+            2px 2px 0 v.$mdcolor, -2px -2px 0 v.$mdcolor,
+            -2px 2px 0 v.$mdcolor, 2px -2px 0 v.$mdcolor,
+            0px 2px 0 v.$mdcolor,  0 -2px 0 v.$mdcolor,
+            -2px 0 0 v.$mdcolor, 2px 0 0 v.$mdcolor;
+    }
+}
+
+.p-headerNav {
+    &_menu {
+        margin: 0;
+        display: flex;
+    }
+    
+    &_item {
+        padding-right: 20px;
+        display: flex;
+        
+        a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 50vh;
+            color: v.$gray-white;
+            border: solid 1px v.$gray-white;
+            position: relative;
+            &::before {
+                position: absolute;
+                content: "";
+                border-radius: 50vh;
+                color: v.$gray-white;
+                border: solid 1px v.$gray-white;
+                width: calc(100% + 10px);
+                height: calc(100% + 10px);
+                top: -5px;
+                left: -5px;
+            }
+        }
+            
+        &:last-child {
+            padding: 0;
+        }
+    }
+    
+    &Sp {
+        display: none;
+        
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .p-headerNav {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        &_menu {
+            display: none;
+        }
+        
+        &Sp {
+            display: flex;
+            
+            #humburger {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                
+                &.is_active .p-headerNavSp_humburger{
+                    animation: open1Anime .3s ease forwards;
+                    &::before {
+                        animation: open2Anime .3s ease forwards;
+                    }
+                    &::after {
+                        animation: open3Anime .3s ease forwards;
+                    }
+                }
+            
+                &.is_unactive .p-headerNavSp_humburger{
+                    animation: close1Anime .3s ease forwards;
+                    &::before {
+                        animation: close2Anime .3s ease forwards;
+                    }
+                    &::after {
+                        animation: close3Anime .3s ease forwards;
+                    }
+                }
+            }
+            
+            &_humburger {
+                position: relative;
+                border-top: solid 3px v.$mdcolor;
+                width: 100%;
+                
+                &::before {
+                    position: absolute;
+                    content: "";
+                    width: 40px;
+                    height: 3px;
+                    border-bottom: solid 3px v.$mdcolor;
+                    top: -16px;
+                    left: 0;
+                }
+                
+                &::after {
+                    position: absolute;
+                    content: "";
+                    width: 40px;
+                    height: 3px;
+                    border-bottom: solid 3px v.$mdcolor;
+                    top: 10px;
+                    left: 0;
+                }
+                
+                
+            }
+            
+            @keyframes open1Anime {
+                0%{
+                    transform-origin: center;
+                }
+                100% {
+                    transform-origin: center;
+                    transform: rotate(-45deg);
+                }
+            }
+            
+            @keyframes open2Anime {
+                0%{
+                    transform-origin: center;
+                }
+                100% {
+                    transform-origin: center;
+                    top: -3px;
+                    
+                }
+            }
+            
+            @keyframes open3Anime {
+                0%{
+                    transform-origin: center;
+                }
+                100% {
+                    transform-origin: center;
+                    top: -3px;
+                    transform: rotate(90deg);
+                }
+            }
+            
+            @keyframes close1Anime {
+                0% {
+                    transform-origin: center;
+                    transform: rotate(-45deg);
+                }
+                100% {
+                    transform-origin: center;
+                    transform: rotate(0deg);
+                }
+            }
+            
+            @keyframes close2Anime {
+                0%{
+                    transform-origin: center;
+                    top: -3px;
+                }
+                100% {
+                    transform-origin: center;
+                    top: -16px;
+                }
+            }
+            
+            @keyframes close3Anime {
+                0%{
+                    transform-origin: center;
+                    transform: rotate(90deg);
+                    top: -3px;
+                }
+                100% {
+                    transform-origin: center;
+                    transform: rotate(0deg);
+                    top: 10px;
+                }
+            }
+            
+            &_wrap {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                visibility: hidden;
+                position: fixed;
+                top: 60px;
+                width: 100%;
+                height: calc(100vh - 60px);
+                left: 0;
+                padding: 30px 5vw;
+                background-color: v.$mcolor;
+                padding-bottom: 60px;
+                z-index: 5;
+                
+                &.is_tshow {
+                    animation: bar_showAnime .2s ease forwards;
+                }
+                
+                &.is_hide {
+                    animation: bar_hideAnime .2s ease forwards;
+                }
+                
+                @keyframes bar_showAnime {
+                    0% {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                    100% {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+                
+                @keyframes bar_hideAnime {
+                    0% {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    100% {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+            }
+            
+            &_item {
+                margin-bottom: 50px;
+                width: 30%;
+                
+                &:last-child {
+                    margin: 0;
+                }
+                
+                a {
+                    display: flex;
+                    justify-content: center;
+                    padding: 10px;
+                    color: v.$gray-white;
+                    width: 100%;
+                    border: solid 1px v.$gray-white;
+                    border-radius: 50vh;
+                    position: relative;
+                    
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        border-radius: 50vh;
+                        color: v.$gray-white;
+                        border: solid 1px v.$gray-white;
+                        width: calc(100% + 10px);
+                        height: calc(100% + 10px);
+                        top: -5px;
+                        left: -5px;
+                    }
+                }
+            }
+        }
+    }    
+}
+
+@media screen and (max-width: 480px) {
+    .p-headerNavSp_item {
+        width: 50%;
+    }
+    
+    .l-footer{
+        &_wrap {
+            padding: 5vw;
+        }
+    }
+}

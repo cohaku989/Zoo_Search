@@ -3,7 +3,7 @@
 @section('contents')
 
     <div class="l-main">
-        <div class="l-side">
+        <div class="l-side spMy">
             <ul class="l-side_list">
                 <li class="l-side_item"><a href="{{ route('dashboard') }}">マイページTOP</a></li>
                 <li class="l-side_item"><a href="{{ route('profile.info') }}">アカウント情報</a></li>
@@ -13,7 +13,7 @@
             </ul>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                    <x-dropdown-link :href="route('logout')" class="c-btn" 
+                    <x-dropdown-link :href="route('logout')" class="p-logout c-btn" 
                         onclick="event.preventDefault();
                         this.closest('form').submit();">
                         {{ __('ログアウト') }}
@@ -23,8 +23,8 @@
         <div class="l-content">
             <div class="l-post_title">
                 <h3 class="c-h3">MY投稿</h3>
-                <a class="c-back" href="{{ route('dashboard') }}">マイページに戻る</a>
-                <a class="c-next" href="{{ route('post.create') }}">新しい投稿</a>
+                <a class="p-pback c-back" href="{{ route('dashboard') }}">マイページに戻る</a>
+                <a class="p-pback c-next" href="{{ route('post.create') }}">新しい投稿</a>
             </div>
             
             <div class="l-post">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Prefecture;
 use App\Models\Zoo;
 use App\Models\Animal_family;
+use App\Models\Animal_order;
 use App\Models\Animal_class;
 use App\Models\Favzoo;
 use App\Models\Favanimal;
@@ -23,15 +24,32 @@ class ZooController extends Controller
  
     public function show(Zoo $zoo)
     {
+        $prevurl = url()->previous();
         $user = Auth::user();
         if($user){
+             $ani_rels = Animal_class::with(['animal_orders' => function($query){
+                $query->with(['animal_families']); 
+            }])->get();
             $where = ['user_id'=> $user->id, 'zoo_id' => $zoo->id];
             $favz = Favzoo::where($where)->first();
             return view('zoos/show')
-            ->with(['zoo' => $zoo, 'user' => $user, 'favz' => $favz]);
+            ->with([
+                'zoo' => $zoo, 
+                'user' => $user, 
+                'favz' => $favz, 
+                'animals' => $ani_rels, 
+                'prevurl' => $prevurl
+                ]);
         }else {
-             return view('zoos/show')
-            ->with(['zoo' => $zoo]);
+            $ani_rels = Animal_class::with(['animal_orders' => function($query){
+                $query->with(['animal_families']); 
+            }])->get();
+            return view('zoos/show')
+            ->with([
+                'zoo' => $zoo, 
+                'animals' => $ani_rels, 
+                'prevurl' => $prevurl
+                ]);
         }
     }
     
@@ -91,6 +109,7 @@ class ZooController extends Controller
     
     public function each_zoo($id, Animal_family $anmlf, Zoo $zoo)
     {
+        $prevurl = url()->previous();
         $user = Auth::user();
         if($user){
             $where = ['user_id'=> $user->id, 'animal_family_id' => $id];
@@ -102,6 +121,7 @@ class ZooController extends Controller
                 'id' => $id, 
                 'fava' => $fava,
                 'user' => $user,
+                'prevurl' => $prevurl
             ]);
         }else {
             $anmlf = Animal_family::with('zoos')->get();
@@ -109,6 +129,7 @@ class ZooController extends Controller
             ->with([
                 'anmlfs' => $anmlf, 
                 'id' => $id,
+                'prevurl' => $prevurl
             ]);
         }
     }

@@ -1,0 +1,175 @@
+@use "variables" as v;
+
+*{
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-size: 16px;
+    line-height: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-size: clamp(16px, 2vw, 18px);
+    color: v.$gray-black;
+    background-color: v.$light-orange;
+}
+
+img {
+    width: 100%;
+}
+
+li {
+    list-style: none;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+.is_show {
+    display: flex!important;
+}
+
+.is_gshow {
+    display: grid!important;
+}
+
+.heart {
+    animation: heartAnimation .2s;
+}
+
+@keyframes heartAnimation {
+  0% { transform: scale(0.6); }
+  10% { transform: scale(0.8); }
+  30% { transform: scale(1.0); }
+  50% { transform: scale(1.1); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1.0); }
+}
+
+.is_none {
+    color: blue;
+}
+
+.favozoo {
+    animation: favzooAnime .4s;
+}
+
+@keyframes favzooAnime {
+  0% { 
+      opacity: 0; 
+  }
+  100% { 
+      opacity: 1; 
+  }
+}
+
+.favoanimal {
+    animation: favoanimalAnime .2s;
+}
+
+@keyframes favoanimalAnime {
+  0% { 
+      transform: scale(0.6);
+      opacity: 0;
+  }
+  10% { transform: scale(0.8); }
+  30% { transform: scale(1.0); }
+  50% { transform: scale(1.1); }
+  80% { transform: scale(1.2); }
+  100% {
+      transform: scale(1.0);
+      opacity: 1;
+  }
+}
+
+.fadeIn {
+    animation: fadeInAnime .5s;
+}
+
+@keyframes fadeInAnime {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.fadeOut {
+    animation: fadeOutAnime .5s;
+}
+
+@keyframes fadeOutAnime {
+    from {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+
+.open {
+    animation: openAnime .5s;
+}
+
+@keyframes openAnime {
+    from {
+        transform-origin: top;
+        transform: scaleY(0) translateY(0);
+        opacity: 0;
+    }
+    to {
+        transform-origin: top;
+        transform: scaleY(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    animation: closeAnime .5s;
+}
+
+@keyframes closeAnime {
+    from {
+        transform-origin: top;
+        transform: scaleY(1) translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform-origin: top;
+        transform: scaleY(0) translateY(0);
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        grid-template-rows: 1fr auto;
+    }
+}
+@media screen and (max-width: 480px) {
+    .c-back {
+        padding: 6px 10px 6px 17px;
+        border-radius: 1rem;
+        min-width: 10rem;
+        font-size: 12px;
+    }
+    
+    .c-next {
+        padding: 6px 17px 6px 10px;
+        border-radius: 1rem;
+        min-width: 10rem;
+        font-size: 12px;
+    }
+    
+}

@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //auth:users settings
 Route::get('/dashboard', function () {
     return view('/account/dashboard');
-})->middleware(['verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -36,13 +36,13 @@ require __DIR__.'/auth.php';
 Route::prefix('admin')->name('admin.')->group(function(){
     
      Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['auth:admin'])->name('dashboard');
+        return view('/admin/account/dashboard');
+    })->middleware(['auth:admin', 'verified'])->name('dashboard');
     
     require __DIR__.'/admin.php';
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/myposts', [PostController::class, 'archive'])->name('post.archive');
     Route::get('/myposts/create', [PostController::class, 'create'])->name('post.create');
     Route::get('/myposts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
@@ -68,22 +68,22 @@ Route::middleware('auth')->group(function () {
     
     Route::get('change-password', [NewPasswordController::class, 'createreset'])
                 ->name('password.change');
-    Route::post('reset-password', [NewPasswordController::class, 'storereset'])
-                ->name('password.update');
+    Route::post('change-password', [NewPasswordController::class, 'storereset'])
+                ->name('password.storereset');
 });
 
-Route::middleware('auth:admin')->group(function () {
-    Route::get('/zoos', [ZooController::class, 'archive'])->name('zoo.archive');
-    Route::get('/zoos/create', [ZooController::class, 'create'])->name('zoo.create');
-    Route::get('/zoos/{zoo}/edit', [ZooController::class, 'edit'])->name('zoo.edit');
-    Route::post('zoos', [ZooController::class, 'store']);
-    Route::put('/zoos/{zoo}', [ZooController::class, 'update']);
-    Route::delete('/zoos/{zoo}', [ZooController::class, 'delete']);
+Route::middleware(['auth:admin', 'verified'])->group(function () {
+    Route::get('/admin/zoos', [ZooController::class, 'archive'])->name('zoo.archive');
+    Route::get('/admin/zoos/create', [ZooController::class, 'create'])->name('zoo.create');
+    Route::get('/admin/zoos/{zoo}/edit', [ZooController::class, 'edit'])->name('zoo.edit');
+    Route::post('/admin/zoos', [ZooController::class, 'store'])->name('zoo.store');
+    Route::put('/admin/zoos/{zoo}', [ZooController::class, 'update'])->name('zoo.update');
+    Route::delete('/admin/zoos/{zoo}', [ZooController::class, 'delete'])->name('zoo.delete');
     //myprofile settings
-    Route::get('/adminprofile', [AdminProfileController::class, 'archive'])->name('admin.archive');
-    Route::get('/adminprofile/{link}/edit', [AdminProfileController::class, 'edit'])->name('admin.edit');
-    Route::put('/adminprofile', [AdminProfileController::class, 'update']);
-    Route::delete('/adminprofile', [AdminProfileController::class, 'delete']);
+    Route::get('/admin/profile', [AdminProfileController::class, 'archive'])->name('admin.archive');
+    Route::get('/admin/profile/{link}/edit', [AdminProfileController::class, 'edit'])->name('admin.edit');
+    Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.update');
+    Route::delete('/admin/profile', [AdminProfileController::class, 'delete'])->name('damin.delete');
 });
 
 Route::get('/gallery/{post}', [PostController::class, 'show'])->name('gallery.post');
@@ -100,4 +100,5 @@ Route::controller(PageController::class)->group(function(){
     Route::get('/gallery', 'archive')->name('gallery');
     Route::get('/gallery/zoo/{id}', 'each_zoo')->name('gallery.zoo');
     Route::get('/gallery/animal/{id}', 'each_animal')->name('gallery.animal');
+    Route::get('/about', 'about')->name('about');
 });
