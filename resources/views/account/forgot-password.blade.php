@@ -25,12 +25,12 @@
                 </div>
     
                 <div class="p-formSubmit">
-                    <x-button>
+                    <x-button class="c-btn">
                         {{ __('Email Password Reset Link') }}
                     </x-button>
                 </div>
             </form>
         </div>
-        <p class="c-backLink c-text"><a href="/login">ログインページへ戻る</a></p>
+        <p class="c-back c-text"><a href="/login">ログインページへ戻る</a></p>
     </div>
 </x-guest-layout>

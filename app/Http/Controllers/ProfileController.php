@@ -14,6 +14,7 @@ class ProfileController extends Controller
 {
     public function archive(User $user)
     {
+        // dd(Auth::guard());
         $user = Auth::user();
         return view('user/profile/archive')->with(['user' => $user]);
     }

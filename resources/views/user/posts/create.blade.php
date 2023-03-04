@@ -2,7 +2,7 @@
 
 @section('contents')
     <div class="l-main">
-        <div class="l-side">
+        <div class="l-side spMy">
             <ul class="l-side_list">
                 <li class="l-side_item"><a href="{{ route('dashboard') }}">マイページTOP</a></li>
                 <li class="l-side_item"><a href="{{ route('profile.info') }}">アカウント情報</a></li>
@@ -12,14 +12,14 @@
             </ul>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                    <x-dropdown-link :href="route('logout')" class="c-btn" 
+                    <x-dropdown-link :href="route('logout')" class="p-logout c-btn" 
                         onclick="event.preventDefault();
                         this.closest('form').submit();">
                         {{ __('ログアウト') }}
                 </x-dropdown-link>
             </form>
         </div>
-        <div class="l-content">
+        <div class="l-content p-pbtn">
             <form action="{{ route('post.store') }}" class="p-fPost" method="POST" enctype="multipart/form-data">
             @csrf
         
@@ -34,12 +34,12 @@
             </div>
                 
             <div class="p-fPost_wrap">
-                <label class="p-fPost_label" for="post_text">Body</label>
+                <label class="p-fPost_label" for="post_text">キャプション</label>
                 <textarea class="p-fPost_text" name="post[body]" placeholder="内容"></textarea>
             </div>
                 
             <div class="p-fPost_wrap">
-                <label class="p-fPost_label" for="zoo_name">Zoo</label>
+                <label class="p-fPost_label" for="zoo_name">タグ付けする動物園</label>
                 <input list="zoo_foptions" id="posted_zoo_show" class="datalist p-fPost_datalist"/>
                 <datalist id="zoo_foptions">
                     @foreach($zoos as $zoo)
@@ -51,7 +51,7 @@
             </div>
                 
             <div class="p-fPost_wrap">
-                <label class="p-fPost_label" for="animal_name">Animal</label>
+                <label class="p-fPost_label" for="animal_name">タグ付けする動物</label>
                 <input list="animal_options" id="posted_animal_show" class="datalist p-fPost_datalist"  />
                 <datalist id="animal_options">
                     @foreach($animals as $animal)
@@ -63,7 +63,7 @@
             </div>
             
             <div class="p-fPost_wrap">        
-                <input class="c-btn" type="submit" value="投稿"/>
+                <input class="c-btn p-pbtn" type="submit" value="投稿"/>
             </div>
         </form>
             

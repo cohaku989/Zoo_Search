@@ -36,7 +36,8 @@ $(function(){
             ajaxFav().done(function(data, status, xhr){
                 console.log(data);
                 $this.hide();
-                $this.next().addClass("is_show");
+                $this.removeClass("favozoo");
+                $this.next().addClass("is_show favozoo");
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -44,8 +45,9 @@ $(function(){
         } else if(favz == "0" && $this.hasClass("is_show")){
             ajaxUnfav().done(function(data, status, xhr){
                 console.log(data);
-                $this.removeClass("is_show");
+                $this.removeClass("is_show favozoo");
                 $this.prev().show();
+                $this.prev().addClass("favozoo")
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -54,7 +56,8 @@ $(function(){
             ajaxUnfav().done(function(data, status, xhr){
                 console.log(data);
                 $this.hide();
-                $this.next().addClass("is_show");
+                $this.removeClass("heart");
+                $this.next().addClass("is_show favozoo");
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -62,8 +65,9 @@ $(function(){
         } else if(favz == "1" && $this.hasClass("is_show")){
             ajaxFav().done(function(data, status, xhr){
                 console.log(data);
-                $this.removeClass("is_show");
+                $this.removeClass("is_show favozoo");
                 $this.prev().show();
+                $this.prev().addClass("favozoo")
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -111,7 +115,8 @@ $(function(){
             ajaxFav().done(function(data, status, xhr){
                 console.log(data);
                 $this.hide();
-                $this.next().addClass("is_show");
+                $this.removeClass("favoanimal");
+                $this.next().addClass("is_show favoanimal");
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -119,8 +124,9 @@ $(function(){
         } else if(fava == "0" && $this.hasClass("is_show")){
             ajaxUnfav().done(function(data, status, xhr){
                 console.log(data);
-                $this.removeClass("is_show");
+                $this.removeClass("is_show favoanimal");
                 $this.prev().show();
+                $this.prev().addClass("favoanimal");
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -129,7 +135,8 @@ $(function(){
             ajaxUnfav().done(function(data, status, xhr){
                 console.log(data);
                 $this.hide();
-                $this.next().addClass("is_show");
+                $this.removeClass("favoanimal");
+                $this.next().addClass("is_show favoanimal");
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);
@@ -137,8 +144,9 @@ $(function(){
         } else if(fava == "1" && $this.hasClass("is_show")){
             ajaxFav().done(function(data, status, xhr){
                 console.log(data);
-                $this.removeClass("is_show");
+                $this.removeClass("is_show favoanimal");
                 $this.prev().show();
+                $this.prev().addClass("favoanimal");
                 
             }).fail(function(xhr, status, error){
                 console.log(xhr.status);

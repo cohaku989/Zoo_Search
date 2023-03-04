@@ -1,0 +1,149 @@
+@use "variables" as v;
+
+.l-header {
+    height: 90px;
+    padding: 0 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: v.$mcolor;
+}
+
+.l-footer {
+}
+
+.l-main, .l-gallery {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.l-side {
+    width: 25%;
+    padding: 50px 0 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.l-content {
+    width: 75%;
+    padding: 50px;
+}
+
+.l-topContent {
+    width: 100%;
+    padding: 50px 30px;
+    border: solid 1px;
+    background-color: v.$gray-white;
+    border-radius: 1rem;
+}
+
+.l-accountWrap {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.l-formWrap {
+    width: 70%;
+    max-width: 700px;
+    padding: 30px 20px;
+    border: solid 1px;
+    margin: 50px 0;
+    border-radius: 1rem;
+    background-color: v.$gray-white;
+}
+
+.l-titleWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2;
+}
+
+.l-archive {
+    border: solid 1px;
+    border-radius: 1rem;
+    background-color: v.$gray-white;
+    width: 100%;
+    padding: 30px 30px 20px;
+    margin: 50px 0 20px;
+}
+
+.l-post {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, auto));
+    grid-auto-rows: 1fr;
+    grid-gap: 10px;
+}
+
+.l-each {
+    width: 100%;
+}
+
+.l-zoo {
+    border: solid 1px;
+    padding: 30px;
+    display: grid;
+    grid-row-gap: 20px;
+    margin-bottom: 50px;
+    border-radius: 1rem;
+    background-color: v.$gray-white;
+}
+
+@media screen and (max-width: 768px) {
+    .l-header {
+        height: 60px;
+        padding: 0 5vw;
+        position: fixed;
+        width: 100%;
+        z-index: 5;
+    }
+    
+    .sp.l-side {
+        width: 100%;
+        padding: 0;
+        position: absolute;
+    }
+    
+    .l-content {
+        width: 100%;
+        padding: 50px 100px;
+        margin-top: 60px;
+    }
+    
+    .l-main, .l-gallery {
+        flex-direction: column;
+        margin-top: 60px;
+    }
+    
+    .spMy + .l-content {
+        margin-top: 30px;
+    }
+    .l-zoo {
+        border-radius: .5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .l-content {
+        padding: 30px 20px;
+    }
+    
+    .l-topContent {
+        padding: 30px 10px;
+        border-radius: 0.5rem;
+        max-width: calc(100vw - 40px);
+    }
+    
+    .l-zoo {
+        padding: 30px 10px;
+        border-radius: .5rem;
+    }
+    
+}

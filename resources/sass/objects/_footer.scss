@@ -1,29 +1,33 @@
+@use "../bases/variables" as v;
 .l-footer {
     &_title{
-        font-size: clamp(18px, 3vw, 22px);
+        font-size: clamp(20px, 3vw, 26px);
         font-weight: bold;
+        color: v.$gray-white;
     }
     
     &_wrap {
         display: flex;
         padding: 2vw 10vw;
         justify-content: space-between;
-        border-top: solid 1px;
+        background-color: v.$mcolor;
+        
     }
     
     &_copy {
         display: flex;
         justify-content: center;
         font-size: clamp(12px, 2vw, 14px);
-        border-top: solid 1px;
         margin: 0;
         padding: 10px 0;
+        background-color: v.$mdcolor;
     }
     
     &_menu {
         padding: 0;
         margin: 0;
         width: 50%;
+        color: v.$gray-white;
     }
     
     &_item {

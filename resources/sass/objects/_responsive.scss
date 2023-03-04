@@ -1,0 +1,745 @@
+@use "../bases/variables" as v;
+
+@media screen and (max-width: 768px) {
+    .p-fPost {
+        margin-top: 0;
+        border-radius: .5rem;
+    }
+    
+    .sp.l-side {
+        &_item {
+            border-radius: 0 0 1rem 1rem;
+            border-width: 1px;
+            padding-right: 10px;
+            border-color: v.$mdcolor;
+            background-color: v.$mdcolor;
+            text-align: center;
+            color: v.$gray-white;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        &_list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            
+            &.topside .l-side_item:nth-child(2) {
+                background-color: v.$mdcolor;
+            }
+        }
+        
+        &_srch{
+            padding: 0;
+            position: relative;
+            border-radius: 0 0 1rem 1rem;
+            border-width: 1px;
+            border-color: v.$mdcolor;
+            
+            &Title {
+                color: v.$gray-white;
+                border-radius: 0 0 1rem 1rem;
+                border-width: 1px;
+                border-color: v.$mdcolor;
+                background-color: v.$mdcolor;
+                padding-left: 0;
+            }
+            
+            &List {
+                -webkit-backface-visibility:hidden;
+                backface-visibility:hidden;
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                padding: 10px 0;
+                background-color: v.$mcolor;
+                border-radius: 0 0 1rem 1rem;
+            }
+            
+            &Btn {
+                background-color: transparent;
+                position: absolute;
+                width: 100%;
+                top: 0;
+                left: 0;
+                height: 100%;
+                border: none;
+                
+                &:checked {
+                    opacity: 0;
+                }
+                
+            }
+            
+            &Item {
+                border: none;
+                color: v.$gray-white;
+                height: fit-content;
+                padding: 0;
+                background-color: transparent;
+                color: rgba(v.$gray-black, 0.6);
+            }
+            
+            input[type="checkbox"]:focus {
+                outline: none;
+            }
+            
+        }
+        
+        .l-side_srchBtn:checked + .l-side_srchList {
+            animation: spBtn2Anime .2s ease forwards;
+        }
+        
+        .l-side_srchBtn + .l-side_srchList {
+            animation: spBtn1Anime .2s ease forwards;
+        }
+        
+        @keyframes spBtn2Anime {
+            0% {
+                position: absolute;
+                opacity: 0;
+                visibility: hidden;
+            }
+            100% {
+                opacity: 1;
+                visibility: visible;
+                position: relative;
+            }
+        }
+            
+        @keyframes spBtn1Anime {
+            100% {
+                position: absolute;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+    }
+    .p-price_btnLabel:nth-child(1) {
+        grid-column: 1/3;
+        grid-row: 1;
+        text-align: center;
+    }
+    
+    .p-price_btnWrap {
+        grid-row-gap: 10px;    
+    }
+    
+    .p-priceAge {
+        grid-column: 1/3;
+        grid-row: 2;
+    }
+    
+    .p-priceEach {
+        margin-top: 20px;
+        grid-row: 3;
+        grid-template-columns: repeat(4, 1fr);
+        
+        .p-price_btnLabel {
+            text-align: center;
+            grid-column: 1/5;
+        }
+    }
+    
+    .p-profile{
+        
+        &_list {
+            grid-template-columns: 1fr 1fr;
+            padding: 10px 30px;
+        }
+        
+        &_item {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            width: 100%;
+            
+            &:nth-child(1){
+                grid-template-columns: 1fr 1fr;
+                grid-column: 1/3;
+                grid-row: 1;
+                :nth-child(1) {
+                    grid-column: 1;
+                    grid-row: 1;
+                }
+                :nth-child(2) {
+                    grid-column: 1;
+                    grid-row: 2;
+                }
+                :nth-child(3) {
+                    grid-column: 2;
+                    grid-row: 1/3;
+                    margin: 0 auto;
+                }
+            }
+            &:nth-child(2){
+                grid-column: 1;
+                grid-row: 2;
+            }
+            &:nth-child(3){
+                grid-column: 2;
+                grid-row: 2;
+                justify-items: center;
+            }
+        }
+        
+        &_eList {
+            grid-template-columns: 1fr;
+            grid-row-gap: 20px;
+        }
+        
+        input.p-profile_eItem {
+            width: fit-content;
+        }
+    }
+    
+    .spMy.l-side {
+        padding: 0;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+        
+        form {
+            grid-column: 3;
+            grid-row: 2;
+            color: v.$gray-black;
+            
+            .c-btn {
+                background-color: v.$mcolor;
+                border: solid 1px v.$gray-white;
+                border-radius: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: v.$gray-white;
+            }
+        }
+        
+        .l-side{
+            
+            &_list {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 1fr 1fr;
+                grid-column: 1/4;
+                grid-row: 1/3;
+            }
+            
+            &_item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: v.$mdcolor;
+                border: solid 1px v.$gray-white;
+                color: v.$gray-white;
+                border-radius: 0;
+                margin-bottom: 0;
+                padding: 10px 0;
+                text-align: center;
+            }
+        }
+    }
+    
+    .spMy.spadmin.l-side{
+        grid-template-rows: initial;
+        form {
+            grid-column: 4;
+            grid-row: 1;
+        }
+        
+         .l-side{
+            
+            &_list{
+                grid-column: 1/4;
+                grid-row: 1;
+                grid-template-rows: initial;
+            }
+        }
+    }
+    
+    .l-post_zoo {
+        border-radius: .5rem;
+    }
+    
+    .p-each_userSet {
+        flex-direction: column;
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+    
+    .p-top {
+        &_tabItem {
+            border-radius: .5rem .5rem 0 0;
+            margin-right: 1px;
+            a {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    }
+    
+    .sp.l-side {
+        
+        &_list {
+            grid-gap: 1px;
+        }
+        
+        &_item {
+            border-radius: 0 0 .5rem .5rem;
+            font-size: 12px;
+            padding: 0 2px;
+            min-height: 40px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.5;
+            
+            &.l-side_srch {
+                padding-right: 0;
+            }
+            
+        }
+        
+        &_srchTitle{
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        &_srchList {
+          border-radius: 0 0 .5rem .5rem;  
+        }
+    }
+    
+    .p-place {
+        &_division{
+            &Label{
+                padding: 5px;
+                font-size: 12px;
+            }
+            &#dChugoku-Shikoku {
+                width: 90%;
+                left: 0;
+            }
+            &#dKanto {
+                width: 95%;
+                left: -14%;
+            }
+        }
+    }
+    
+    .c-place {
+        &_each {
+            font-size: 20px;
+        }
+        
+        &_zoo {
+            border-radius: 0.5rem;
+            font-size: 12px;
+            padding: 6px;
+            bottom: -35px;
+            &::before {
+                top: -14px;
+                margin-left: -7px;
+                border-width: 7px ;
+            }
+            
+            &::after {
+                top: -12px;
+                margin-left: -6px;
+                border-width: 6px ;
+            }
+        }
+    }
+    
+    .l-topContent .c-animal {
+        &_class {
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            grid-gap: 5px;
+            
+            &Item {
+                font-size: 12px;
+                &:last-child {
+                    font-size: 12px;
+                }
+                
+                &::before {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+        
+        &_order {
+            grid-template-columns: repeat(3, 1fr);
+            border-radius: .5rem;
+            
+            &Item {
+                padding: 15px 0;
+                border-radius: .5rem;
+                font-size: 12px;
+                aspect-ratio: initial;
+            }
+        }
+        
+        &_family {
+            grid-template-columns: 1fr;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+    }
+    
+    .p-price {
+        &Age {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;
+            
+            &_item {
+                font-size: 14px;
+            }
+        }
+        
+        &Zoo {
+            justify-content: center;
+        }
+        
+        &Each {
+            grid-template-columns: repeat(2, 1fr);
+            
+            &_item {
+                padding: 5px 10px;
+            }
+            
+            .p-price_btnLabel {
+                grid-column: 1/3;
+            }
+        }
+        
+    }
+    
+    .p-zooEach {
+        grid-template-columns: 1fr;
+        grid-row-gap: 20px;
+        
+        &:nth-child(5) .p-zooEach_content {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .p-arcAnimal_list {
+        border-radius: .5rem;
+        grid-template-columns: 1fr;
+        min-height: initial;
+    }
+    
+    .p-arcAnimal_item {
+        height: fit-content;
+    }
+    
+    .p-favaWrap {
+        top: -30px;
+    }
+    
+    .p-zooCat {
+        &_fWrap {
+            grid-template-columns: 1fr;
+            bottom: calc(-100% - 45px);
+        }
+        
+        &_ofamily {
+            grid-column: 1;
+        }
+    }
+    
+    .p-each {
+        max-width: calc(100vw - 40px);
+        border-radius: .5rem;
+        
+        &_links {
+            border-radius: .5rem;
+        }
+        
+        &Cont {
+            grid-template-columns: 1fr;
+        }
+        
+        &_img {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        
+        &_text {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        
+        &_zooWrap {
+            grid-column: 1;
+            grid-row: 3;
+        }
+        
+        &_animalWrap {
+            grid-column: 1;
+            grid-row: 4;
+        }
+        
+        &_userSet {
+            flex-direction: column;
+            :nth-child(2){
+                margin-top: 10px;
+            }
+            
+            .c-btn {
+                padding: 6px 10px;
+                margin-right: 0!important;
+                font-size: 12px;
+            }
+        }
+    }
+    
+    .like::before {
+        font-size: 30px;
+        padding: 0;
+        position: relative;
+        left: -10px;
+    }
+    
+    .unlike::before {
+        font-size: 30px;
+        padding: 0;
+        position: relative;
+        left: -10px;
+    }
+    
+    .p-about_textWrap {
+        border-radius: .5rem;
+    }
+    
+    .spMy.l-side {
+        .l-side{
+            &_item{
+                height: 100%;
+                font-size: 12px;
+                
+                a {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+        
+        form .c-btn {
+            font-size: 12px;
+            min-width: initial;
+        }
+    }
+    
+    .l-accountWrap .l-formWrap {
+        width: 90%;
+    }
+    
+    .p-formEach {
+        align-items: flex-start;
+        flex-direction: column;
+        .c-formInput, .c-formLabel {
+            width: 100%;
+        }
+    }
+    
+    .p-dashWrap_item {
+        font-size: 14px;
+        a::before {
+            margin-bottom: 5px;
+        }
+    }
+    
+    .p-profile {
+        &_list {
+            grid-template-columns: 1fr;
+        }
+        
+        &_item{
+            padding: 10px;
+        }
+        
+        &_item:nth-child(1) {
+            grid-template-columns: auto 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-column: 1;
+            grid-row: 1;
+            
+            :nth-child(1){
+                grid-column: 1;
+                grid-row: 1;
+                margin-right: 10px;
+            }
+            
+            :nth-child(2){
+                grid-column: 2;
+                grid-row: 1;
+                margin: 0;
+            }
+            
+            :nth-child(3){
+                grid-column: 1/3;
+                grid-row: 2;
+            }
+        }
+        
+        &_item:nth-child(2) {
+            // grid-template-columns: 1fr;
+            grid-column: 1;
+            grid-row: 2;
+        }
+        
+        &_item:nth-child(3) {
+            grid-column: 1;
+            grid-row: 3;
+        }
+        
+        .p-pnext{
+            padding: 5px;
+            margin-right: 0;
+            font-size: 14px;
+        }
+        
+        &_pwItem {
+            grid-template-columns: 1fr;
+            text-align: center;
+            :nth-child(2){
+                margin: 10px 0 0 0;
+            }
+        }
+        
+        input.p-profile_eItem {
+            font-size: 14px;
+        }
+    }
+    
+    .p-fPost {
+        grid-template-columns: 1fr;
+        padding: 30px 10px;
+        max-width: calc(100vw - 40px);
+        
+        &_wrap{
+            &:nth-of-type(1){
+                grid-template-columns: 1fr;
+                grid-column: 1;
+                grid-row: 1;
+                :nth-child(3){
+                    grid-column: 1;
+                    grid-row: 3;
+                }
+            }
+            
+            &:nth-of-type(2){
+                grid-column: 1;
+                grid-row: 2;
+            }
+            
+            &:nth-of-type(3){
+                grid-column: 1;
+                grid-row: 3;
+            }
+            
+            &:nth-of-type(4){
+                grid-column: 1;
+                grid-row: 4;
+            }
+            
+            &:nth-of-type(5){
+                grid-column: 1;
+                grid-row: 5;
+            }
+            
+        }
+    }
+    
+    .spMy.spadmin {
+        .l-side {
+            &_item{
+                height: 100%;
+                
+                a {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+    
+    .p-dashWrap.p-admin {
+        grid-template-columns: repeat(2, minmax(80px, 100px));
+    }
+    
+    .adminSet .p-profile_item{
+        &:nth-child(1){
+            grid-column: 1/3;
+        }
+        &:nth-child(2){
+            grid-column: 1/3;
+        }
+    }
+    
+    .p-fPost.p-fZoo {
+        grid-template-columns: 1fr;
+        div:is(:nth-of-type(1), :nth-of-type(2), :nth-of-type(3), :nth-of-type(4), :nth-of-type(5), :nth-of-type(12)) {
+            grid-column: 1;
+        }
+        
+        .p-fZoo_order {
+            grid-template-columns: 1fr;
+            padding: 15px;
+        }
+    }
+    
+    .p-profile {
+        max-width: calc(100vw - 40px);
+    }
+    
+    .p-arcAnimal {
+        margin-top: 30px;
+    }
+    
+    .c-btn, .c-next, .c-back {
+        padding: 15px 10px!important;
+    }
+    
+    .p-fPost, .p-fZoo {
+        grid-auto-rows: 0fr;
+        overflow: initial;
+        max-height: fit-content;
+        
+        &_wrap, &_label, &_input {
+            height: fit-content;
+        }
+    }
+    
+    .l-post_title a{
+        &:nth-of-type(1){
+            grid-column: 1/3;
+            grid-row: 2;  
+            margin: 0 auto;
+        } 
+        &:nth-of-type(2) {
+            grid-column: 1/3;
+            grid-row: 3;
+            margin: 0 auto;
+        }
+    }
+    
+    .p-each_user{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .p-each_btnWrap {
+        margin-bottom: 20px; 
+    }
+}

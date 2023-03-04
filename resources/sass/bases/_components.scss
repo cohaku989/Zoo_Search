@@ -52,6 +52,7 @@
     font-size: 16px;
     display: block;
     text-align: center;
+    border-radius: 1rem;
     
     &::before {
         content: '';
@@ -76,6 +77,7 @@
     font-size: 16px;
     display: block;
     text-align: center;
+    border-radius: 1rem;
     
     &::after {
         content: '';
@@ -88,4 +90,8 @@
         right: 5%;
         top: calc((100% - 7px)/2);
     }
+}
+
+.c-error {
+    margin-top: 20px;
 }

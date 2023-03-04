@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('admin.auth.register');
+        return view('admin.account.register');
     }
 
     /**
@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        
         Auth::guard('admin')->login($user);
 
         return redirect(RouteServiceProvider::ADMIN_HOME);

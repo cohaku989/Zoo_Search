@@ -1,3 +1,5 @@
+@use "../bases/variables" as v;
+
 .p-gallery {
     
     &List{
@@ -6,6 +8,12 @@
         grid-template-columns: repeat(auto-fill, minmax(130px, auto));
         grid-auto-rows: 1fr;
         grid-gap: 10px;
+        margin-bottom: 50px;
+    }
+    
+    &_wrap {
+        min-height: 60vh;
+        margin-bottom: 50px;
     }
     
 }
@@ -22,10 +30,11 @@
     &_item {
         border: solid 1px;
         aspect-ratio: 1 / 1;
+        background-color: v.$gray-white;
         
         a {
           display: block;
-          padding: 5px;
+          padding: 10px;
           height: 100%;
         } 
         a img {
@@ -34,4 +43,26 @@
             border: solid 1px;
         }
     }
+}
+
+.p-about {
+    .c-h3 {
+        text-align: center;
+    }
+    
+    &_textWrap {
+        margin: 50px 0 ;
+        border: solid 1px;
+        border-radius: 1rem;
+        background-color: v.$gray-white;
+        padding: 30px;
+        display: grid;
+        grid-row-gap: 10px;
+        line-height: 1.5;
+    }
+    
+}
+
+.c-back.p-aboutback {
+    background-color: v.$gray-white;
 }

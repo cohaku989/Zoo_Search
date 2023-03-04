@@ -1,104 +1,118 @@
 @extends ('commons.origin')
 
 @section('contents')
-    
-    <form action="/zoos/{{ $zoo->id }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="l-main">
+        <div class="spMy spadmin l-side">
+            <ul class="l-side_list">
+                <li class="l-side_item"><a href="{{ route('admin.dashboard') }}">管理者ページTOP</a></li>
+                <li class="l-side_item"><a href="{{ route('admin.archive') }}">アカウント情報</a></li>
+                <li class="l-side_item"><a href="{{ route('zoo.archive') }}">動物園リスト</a></li>
+            </ul>
+            <form method="POST" action="{{ route('admin.logout') }}">
+                @csrf
+                <x-dropdown-link :href="route('admin.logout')" class="p-logout c-btn" 
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                        {{ __('ログアウト') }}
+                </x-dropdown-link>
+            </form>
+        </div>
         
-        <br>
-        <label for="zoo_name">動物園名</label>
-        <br>
-        <input type="text" name="zoo[zoo_name]" placeholder="動物園名" value="@if($zoo->zoo_name){{ $zoo->zoo_name }} @else {{ old('zoo[zoo_name]') }} @endif" required />
-        <br>
-        
-        <label for="">紹介文</label>
-        <br>
-        <textarea name="zoo[caption]" required>@if($zoo->caption){{$zoo->caption}}  @else{{ old('zoo[caption]') }} @endif</textarea>
-        <br>
-        
-        <label for="adress">住所</label>
-        <br>
-        <input type="text" name="zoo[adress]" value="@if($zoo->adress){{$zoo->adress}} @else{{ old('zoo[adress]') }} @endif" required />
-        <br>
-        <select name="zoo[prefecture_id]" value="{{ old('zoo[prefecture_id]') }}" required >
-            @foreach($prefectures as $prefecture)
-                <option value="{{ old('zoo[prefecture_id]', $prefecture->id) }}" @if(isset($zoo->prefecture_id) && ($zoo->prefecture_id == $prefecture->id)  ) selected @endif>{{ $prefecture->prefecture }}</option>
-            @endforeach
-        </select>
-        <br>
-        
-        <label for="url">ホームページURL</label>
-        <br>
-        <input type="url" name="zoo[hp_url]" value="@if($zoo->hp_url){{$zoo->hp_url }} @else{{ old('zoo[hp_url]') }} @endif" required />
-        <br>
-        
-        <style>
-            .c-anmlChild {
-                display: none;
-            }
-        </style>
-        <div class="l-animal">
-        @foreach($ani_rels as $animal_class)
-            <details class="e-animal_class">
-                <summary>{{ $animal_class->animal_class }}</summary>
-                <ul class="e-animal_order">
-                @foreach($animal_class->animal_orders as $animal_order)
-                    <li>
-                        <p class="c-anmlPrnt{{ $animal_order->id }}" id="anmlPrnt{{ $animal_order->id }}">{{ $animal_order->animal_order }}</p>
-                        <ul class="e-animal_family">
-                        @foreach($animal_order->animal_families as $animal_family)
-                            <li id="anmlChild{{ $animal_family->id }}" class="c-anmlChild c-anmlPrnt{{ $animal_family->animal_order_id }}">
-                                
-                                <input type="checkbox" name="animal_family[]" value="{{ $animal_family->id }}" 
-                                    @foreach($checked as $check) @if($check->id == $animal_family->id) checked @endif @endforeach
-                                class="">{{ $animal_family->animal_family }}
+        <div class="l-content fzoo">
+            
+            <form class="p-fPost p-fZoo" action="{{ route("zoo.update", $zoo->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="zoo_name">動物園名</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[zoo_name]" placeholder="動物園名" value="@if($zoo->zoo_name){{ $zoo->zoo_name }} @else {{ old('zoo[zoo_name]') }} @endif" required />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="">紹介文</label>
+                    <textarea class="p-fZoo_text" name="zoo[caption]" required>@if($zoo->caption){{$zoo->caption}}  @else{{ old('zoo[caption]') }} @endif</textarea>
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="adress">住所</label>
+                    <input class="p-fZoo_select" type="text" name="zoo[adress]" value="@if($zoo->adress){{$zoo->adress}} @else{{ old('zoo[adress]') }} @endif" required />
+                    <select name="zoo[prefecture_id]" value="{{ old('zoo[prefecture_id]') }}" required >
+                        @foreach($prefectures as $prefecture)
+                            <option value="{{ old('zoo[prefecture_id]', $prefecture->id) }}" @if(isset($zoo->prefecture_id) && ($zoo->prefecture_id == $prefecture->id)  ) selected @endif>{{ $prefecture->prefecture }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="url">ホームページURL</label>
+                    <input class="p-fZoo_input" type="url" name="zoo[hp_url]" value="@if($zoo->hp_url){{$zoo->hp_url }} @else{{ old('zoo[hp_url]') }} @endif" required />
+                </div>
+                
+                <div class="p-fZoo_wrap c-animal">
+                @foreach($ani_rels as $animal_class)
+                    <details class="p-fZoo_class c-animal_class">
+                        <summary>{{ $animal_class->animal_class }}</summary>
+                        <ul class="p-fZoo_order c-animal_order">
+                        @foreach($animal_class->animal_orders as $animal_order)
+                            <li class="p-fZoo_orderWrap">
+                                <p class="p-fZoo_orderItem c-anmlPrnt" id="c-anmlPrnt{{ $animal_order->id }}">{{ $animal_order->animal_order }}</p>
+                                <ul class="p-fZoo_family c-animal_family">
+                                @foreach($animal_order->animal_families as $animal_family)
+                                    <li id="anmlChild{{ $animal_family->id }}" class="p-fZoo_familyWrap c-anmlPrnt{{ $animal_family->animal_order_id }}">
+                                        
+                                        <input type="checkbox" name="animal_family[]" value="{{ $animal_family->id }}" 
+                                            @foreach($checked as $check) @if($check->id == $animal_family->id) checked @endif @endforeach
+                                        class="p-fZoo_familyItem" >{{ $animal_family->animal_family }}
+                                    </li>
+                                    
+                                @endforeach
+                                </ul>
                             </li>
-                            
                         @endforeach
                         </ul>
-                    </li>
+                    </details>
                 @endforeach
-                </ul>
-            </details>
-        @endforeach
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="adults_price">シニア料金</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[seniors_price]" value="{{ $zoo->seniors_price }}" />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="adults_price">大人料金</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[adults_price]" value="{{ $zoo->adults_price }}" />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="middle_price">高校生料金</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[hsstudents_price]" value="{{ $zoo->hsstudents_price }}" />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="middle_price">中学生料金</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[jhsstudents_price]" value="{{ $zoo->jhsstudents_price }}" />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="middle_price">小学生料金</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[esstudents_price]" value="{{ $zoo->esstudents_price }}" />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <label class="p-fZoo_label" for="children_price">こども料金</label>
+                    <input class="p-fZoo_input" type="text" name="zoo[children_price]" value="{{ $zoo->children_price }}" />
+                </div>
+                
+                <div class="p-fZoo_wrap">
+                    <input class="c-btn" type="submit" value="更新"/>
+                </div>
+            </form>
+            
+            
+            <a href="{{ route('zoo.show', $zoo->id) }}" class="c-back">投稿に戻る</a>
         </div>
-
-        <br>
-        
-        <label for="adults_price">シニア料金</label>
-        <br>
-        <input type="text" name="zoo[seniors_price]" value="{{ old('zoo[seniors_price]') }}" />
-        <br>
-        <label for="adults_price">大人料金</label>
-        <br>
-        <input type="text" name="zoo[adults_price]" value="{{ old('zoo[adults_price]') }}" />
-        <br>
-        
-        <label for="middle_price">高校生料金</label>
-        <br>
-        <input type="text" name="zoo[hsstudents_price]" value="{{ old('zoo[hsstudents_price]') }}" />
-        <br>
-        
-        <label for="middle_price">中学生料金</label>
-        <br>
-        <input type="text" name="zoo[jhsstudents_price]" value="{{ old('zoo[jhsstudents_price]') }}" />
-        <br>
-        
-        <label for="middle_price">小学生料金</label>
-        <br>
-        <input type="text" name="zoo[esstudents_price]" value="{{ old('zoo[esstudents_price]') }}" />
-        <br>
-        
-        <label for="children_price">こども料金</label>
-        <br>
-        <input type="text" name="zoo[children_price]" value="{{ old('zoo[children_price]') }}" />
-        <br>
-        <input type="submit" value="更新"/>
-    </form>
-    
-    <div>
-        <a href="/zoos/{{ $zoo->id }}" class="c-zoo_back">Zoo</a>
     </div>
     
 @endsection

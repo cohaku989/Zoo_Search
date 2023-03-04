@@ -30,6 +30,6 @@ class AdminProfileController extends Controller
             $admin->email = $request->email;
         }
         $admin->save();
-        return redirect('/adminprofile');
+        return redirect('/admin/profile');
     }
 }

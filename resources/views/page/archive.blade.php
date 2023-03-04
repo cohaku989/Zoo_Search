@@ -3,19 +3,20 @@
 @section('contents')
     
     <div class="l-gallery">
-        <div class="l-side">
-            <ul class="l-side_list">
-                <li class="l-side_item"><a href="/">TOPページ</a></li>
-                <li class="l-side_item l-side_srch">
-                    <p class="l-side_srchTitle">動物園を探す</p>
-                    <ul class="l-side_srchList">
-                        <li class="l-side_srchItem"><a href="{{ route('search.place') }}">場所から探す</a></li>
-                        <li class="l-side_srchItem"><a href="{{ route('search.animal') }}">動物カテゴリから探す</a></li>
-                        <li class="l-side_srchItem"><a href="{{ route('search.price') }}">入園料金から探す</a></li>
+        <div class="sp l-side">
+            <ul class="sp l-side_list topside">
+                <li class="sp l-side_item"><a href="/">TOPページ</a></li>
+                <li class="sp l-side_item l-side_srch">
+                    <label for="sp_side" class="sp l-side_srchTitle">動物園を探す</label>
+                    <input type="checkbox" class="sp l-side_srchBtn" id="sp_side" />
+                    <ul class="sp l-side_srchList">
+                        <li class="sp l-side_srchItem"><a href="{{ route('search.place') }}">場所から探す</a></li>
+                        <li class="sp l-side_srchItem"><a href="{{ route('search.animal') }}">動物から探す</a></li>
+                        <li class="sp l-side_srchItem"><a href="{{ route('search.price') }}">料金から探す</a></li>
                     </ul>
                 </li>
-                <li class="l-side_item"><a href="">サイトについて</a></li>
-                <li class="l-side_item"><a href="{{ route("gallery") }}">ギャラリー</a></li>
+                <li class="sp l-side_item"><a href="{{ route('about') }}">サイトについて</a></li>
+                <li class="sp l-side_item"><a href="{{ route("gallery") }}">ギャラリー</a></li>
             </ul>
         </div>
         
@@ -28,6 +29,7 @@
                 @endforeach
             </ul>
             
+            <a href="/" class="p-aboutback c-back">TOPページへ戻る</a>
         </div>
     </div>
 @endsection

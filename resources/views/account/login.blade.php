@@ -42,7 +42,7 @@
                             <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                         </label>
                     </div>
-                    <x-button class="c-formBtn">
+                    <x-button class="c-btn c-formBtn">
                         {{ __('Log in') }}
                     </x-button>
                     
@@ -54,6 +54,6 @@
                 </div>
             </form>
         </div>
-        <p class="c-backLink c-text"><a href="/">TOPページへ戻る</a></p>
+        <p class="c-back c-text"><a href="/">TOPページへ戻る</a></p>
     </div>
 </x-guest-layout>

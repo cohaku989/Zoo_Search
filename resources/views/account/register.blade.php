@@ -45,7 +45,7 @@
                 </div>
     
                 <div class="p-formSubmit">
-                    <x-button class="c-formBtn">
+                    <x-button class="c-formBtn c-btn">
                         {{ __('Register') }}
                     </x-button>
                     
@@ -55,6 +55,6 @@
                 </div>
             </form>
         </div>
-        <p class="c-backLink c-text"><a href="/">TOPページへ戻る</a></p>
+        <p class="c-back"><a href="/">TOPページへ戻る</a></p>
     </div>
 </x-guest-layout>

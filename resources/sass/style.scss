@@ -1,9 +1,2 @@
-@import 'components';
-@import 'layouts';
-
-@import './objects/header';
-@import './objects/footer';
-@import './objects/top';
-@import './objects/page';
-@import './objects/account';
-@import 'common';
+@use './objects';
+@use './bases';
